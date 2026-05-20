@@ -132,6 +132,74 @@ function detectState(text, hintedCity) {
   return null;
 }
 
+// Pull the actual organizer/promoter name from a ticket-platform page
+// (Eventbrite, Posh, Shotgun, DICE, etc.). These pages put the event title
+// in <title> but the promoter shows up in body text near "Hosted by",
+// "Organized by", "About the organizer", etc.
+export function extractOrganizer(text) {
+  if (!text) return null;
+  const patterns = [
+    /Hosted by\s+([A-Z][^.\n|•]{1,60})/,
+    /About the organizer[\s\n:]+([A-Z][^.\n|•]{1,60})/i,
+    /Organized by\s+([A-Z][^.\n|•]{1,60})/i,
+    /Presented by\s+([A-Z][^.\n|•]{1,60})/i,
+    /Promoter:\s*([A-Z][^.\n|•]{1,60})/i,
+    /Brought to you by\s+([A-Z][^.\n|•]{1,60})/i,
+    // Shotgun-style: "Curated by ..."
+    /Curated by\s+([A-Z][^.\n|•]{1,60})/i,
+  ];
+  for (const p of patterns) {
+    const m = text.match(p);
+    if (m) {
+      let name = m[1].trim().replace(/[.,;:]$/, '').replace(/\s+/g, ' ');
+      name = name.replace(/\s+(on|in|at|featuring|feat\.?|with)\s+.*$/i, '').trim();
+      if (name.length >= 2 && name.length <= 80) return name;
+    }
+  }
+  return null;
+}
+
+// Extract brand name from an Instagram page title.
+// IG titles look like: "SoFlo Presents (@soflopresents) • Instagram photos and videos"
+export function extractIgBrand(title) {
+  if (!title) return null;
+  const m = title.match(/^(.+?)\s*\(@[A-Za-z0-9_.]+\)/);
+  if (m) {
+    const n = m[1].trim();
+    if (n.length >= 2 && n.length <= 80) return n;
+  }
+  return null;
+}
+
+// Pull the handle from an instagram.com URL path: instagram.com/<handle>
+export function extractIgHandleFromUrl(url) {
+  if (!url) return null;
+  const m = String(url).match(/instagram\.com\/([A-Za-z0-9_.]{2,30})\/?/i);
+  if (!m) return null;
+  const h = m[1].toLowerCase().replace(/\.$/, '');
+  const blocked = ['p', 'reels', 'tv', 'explore', 'stories', 'directory', 'accounts', 'about', 'developer', 'web', 'embed'];
+  if (blocked.includes(h)) return null;
+  return h;
+}
+
+// Linktree / Beacons / bio.site brand extraction.
+// linktr.ee/<handle> → handle; or pull from title "@handle | Linktree".
+export function extractBioBrand(url, title) {
+  if (title) {
+    let n = title
+      .replace(/\s*[|–—]\s*(linktree|beacons|bio\.site|allmylinks)\s*$/i, '')
+      .replace(/^(linktree|beacons|bio\.site|allmylinks)\s*[|–—]\s*/i, '')
+      .trim();
+    if (n.startsWith('@')) n = n.slice(1);
+    if (n.length >= 2 && n.length <= 80) return n;
+  }
+  if (url) {
+    const m = url.match(/(?:linktr\.ee|beacons\.ai|bio\.site|lnk\.bio|allmylinks\.com)\/([A-Za-z0-9_.\-]+)/i);
+    if (m) return m[1];
+  }
+  return null;
+}
+
 export function extractFromPage({ url, title, text }) {
   const safeText = text || '';
   const emails = safeText.match(EMAIL_RE) || [];

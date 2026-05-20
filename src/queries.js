@@ -84,3 +84,44 @@ export function buildQueries({ cities = CITIES, verticals = Object.keys(VERTICAL
   }
   return out;
 }
+
+// Discovery queries that target ticketing-platform event pages, Linktree-style
+// bio pages, and Instagram directly via includeDomains. These find IG-first
+// promoter brands that don't surface through open-web neural search.
+const TICKET_DISCOVERY_DOMAINS = [
+  'eventbrite.com', 'posh.vip', 'shotgun.live', 'dice.fm', 'tixr.com',
+  'ra.co', 'seetickets.us', 'ticketweb.com', 'universe.com', 'prekindle.com',
+];
+const BIO_DISCOVERY_DOMAINS = ['linktr.ee', 'beacons.ai', 'bio.site', 'lnk.bio', 'allmylinks.com'];
+const SOCIAL_DISCOVERY_DOMAINS = ['instagram.com'];
+
+export function buildDiscoveryQueries({ cities = CITIES } = {}) {
+  const out = [];
+  for (const city of cities) {
+    out.push({
+      vertical: 'discovery_tickets',
+      city,
+      query: `upcoming nightlife party concert or DJ event in ${city} on sale now`,
+      includeDomains: TICKET_DISCOVERY_DOMAINS,
+    });
+    out.push({
+      vertical: 'discovery_tickets',
+      city,
+      query: `college 18 plus party rave or house music event in ${city} this season`,
+      includeDomains: TICKET_DISCOVERY_DOMAINS,
+    });
+    out.push({
+      vertical: 'discovery_bio',
+      city,
+      query: `${city} independent event promoter or party brand linktree bio`,
+      includeDomains: BIO_DISCOVERY_DOMAINS,
+    });
+    out.push({
+      vertical: 'discovery_social',
+      city,
+      query: `${city} event promoter party brand Instagram profile bio link`,
+      includeDomains: SOCIAL_DISCOVERY_DOMAINS,
+    });
+  }
+  return out;
+}
