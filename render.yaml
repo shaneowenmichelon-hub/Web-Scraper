@@ -14,12 +14,11 @@ services:
         sync: false
       - key: NODE_ENV
         value: production
-    # NOTE: persistent disks require a paid plan. With `plan: free` Render
-    # may reject the disk block or silently drop persistence on redeploy.
-    # To enable persistence, change `plan:` to `starter` (or higher) and
-    # uncomment the block below. Until then, the SQLite DB resets on
-    # every deploy.
-    # disk:
-    #   name: data
-    #   mountPath: /opt/render/project/src/data
-    #   sizeGB: 1
+    # Persistent disk — SQLite DB survives deploys. Requires a paid plan
+    # (Render Pro is fine). The mountPath matches src/db.js: DB_PATH =
+    # <repo>/data/scraper.db, which Render places at
+    # /opt/render/project/src/data on this service.
+    disk:
+      name: data
+      mountPath: /opt/render/project/src/data
+      sizeGB: 1
