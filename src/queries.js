@@ -63,6 +63,12 @@ export const CITIES = [
   'San Diego', 'Seattle', 'Denver', 'Boston', 'Washington DC', 'Philadelphia',
   'Phoenix', 'Portland', 'Detroit', 'Minneapolis', 'New Orleans', 'Charlotte',
   'Tampa', 'Orlando', 'Oakland', 'Salt Lake City', 'Kansas City', 'St. Louis',
+  // College-market additions (state suffix kept for disambiguation):
+  'Columbus, OH', 'Gainesville, FL', 'State College, PA', 'Baton Rouge, LA',
+  'Syracuse, NY', 'College Park, MD', 'New Brunswick, NJ', 'Iowa City, IA',
+  'Lawrence, KS', 'Lincoln, NE', 'Raleigh, NC', 'Storrs, CT',
+  'Tuscaloosa, AL', 'Columbia, SC', 'Madison, WI', 'Lansing, MI',
+  'Ann Arbor, MI',
 ];
 
 export function buildQueries({ cities = CITIES, verticals = Object.keys(VERTICALS) } = {}) {
