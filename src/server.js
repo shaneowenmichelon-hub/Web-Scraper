@@ -33,7 +33,7 @@ app.get('/api/stats', (req, res) => {
 });
 
 app.get('/api/companies', (req, res) => {
-  const { vertical, city, status, q, has_email, has_phone, has_instagram, limit = 200, offset = 0, sort = 'last_seen', dir = 'desc' } = req.query;
+  const { vertical, city, status, q, has_email, has_phone, has_instagram, limit, offset = 0, sort = 'last_seen', dir = 'desc' } = req.query;
   const where = [];
   const params = [];
   if (vertical) { where.push('vertical = ?'); params.push(vertical); }
@@ -50,6 +50,12 @@ app.get('/api/companies', (req, res) => {
   const allowedSort = new Set(['last_seen', 'first_seen', 'name', 'city', 'vertical']);
   const sortCol = allowedSort.has(sort) ? sort : 'last_seen';
   const sortDir = dir === 'asc' ? 'ASC' : 'DESC';
+
+  // No explicit limit → return everything (capped at 50k as a safety net to
+  // avoid OOMing the renderer on a runaway query).
+  const effectiveLimit = limit == null ? 50000 : Math.min(Number(limit), 50000);
+  const effectiveOffset = Number(offset) || 0;
+
   const sql = `
     SELECT c.*, (SELECT COUNT(*) FROM events e WHERE e.company_id = c.id) AS event_count
     FROM companies c
@@ -57,7 +63,7 @@ app.get('/api/companies', (req, res) => {
     ORDER BY ${sortCol} ${sortDir}
     LIMIT ? OFFSET ?
   `;
-  const rows = db.prepare(sql).all(...params, Number(limit), Number(offset));
+  const rows = db.prepare(sql).all(...params, effectiveLimit, effectiveOffset);
   const total = db.prepare(`SELECT COUNT(*) AS n FROM companies ${where.length ? 'WHERE ' + where.join(' AND ') : ''}`).get(...params).n;
   res.json({ rows, total });
 });
