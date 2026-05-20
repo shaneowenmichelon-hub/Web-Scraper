@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Promoter Tracker</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <h1>Promoter Tracker</h1>
+      <span class="tagline">US independent event companies · powered by Exa</span>
+    </div>
+    <div class="actions">
+      <button id="run-scrape" class="primary">Run scrape</button>
+      <a id="export-csv" class="secondary" href="/api/export.csv">Export CSV</a>
+    </div>
+  </header>
+
+  <section class="stat-grid" id="stats"></section>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <h3>Filters</h3>
+      <label>Search<input id="f-q" type="search" placeholder="name, domain, notes" /></label>
+      <label>Vertical<select id="f-vertical"><option value="">All</option></select></label>
+      <label>City<select id="f-city"><option value="">All</option></select></label>
+      <label>Status<select id="f-status">
+        <option value="">All</option>
+        <option value="new">New</option>
+        <option value="contacted">Contacted</option>
+        <option value="qualified">Qualified</option>
+        <option value="rejected">Rejected</option>
+      </select></label>
+      <label class="check"><input type="checkbox" id="f-email" /> Has email</label>
+      <label class="check"><input type="checkbox" id="f-phone" /> Has phone</label>
+      <label class="check"><input type="checkbox" id="f-ig" /> Has Instagram</label>
+      <button id="apply-filters" class="secondary block">Apply</button>
+      <button id="clear-filters" class="link">Clear</button>
+
+      <h3 style="margin-top:1.5rem">Recent jobs</h3>
+      <ul id="jobs" class="jobs"></ul>
+    </aside>
+
+    <section class="content">
+      <div class="table-meta">
+        <span id="count">—</span>
+        <span id="active-job-indicator" class="hidden">⟳ scrape running…</span>
+      </div>
+      <div class="table-wrap">
+        <table id="rows">
+          <thead>
+            <tr>
+              <th data-sort="name">Company</th>
+              <th data-sort="vertical">Vertical</th>
+              <th data-sort="city">City</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>IG</th>
+              <th>Events</th>
+              <th>Status</th>
+              <th data-sort="last_seen">Last seen</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="run-dialog">
+    <form method="dialog" id="run-form">
+      <h3>Run scrape</h3>
+      <label>Verticals (blank = all)
+        <select id="run-verticals" multiple size="6"></select>
+      </label>
+      <label>Cities (blank = all)
+        <select id="run-cities" multiple size="6"></select>
+      </label>
+      <div class="row">
+        <label>Results / query<input id="run-results" type="number" value="6" min="1" max="25" /></label>
+        <label>Concurrency<input id="run-concurrency" type="number" value="4" min="1" max="10" /></label>
+        <label>Max queries (smoke test)<input id="run-max" type="number" placeholder="(unlimited)" /></label>
+      </div>
+      <div class="dialog-actions">
+        <button value="cancel" class="link">Cancel</button>
+        <button id="run-submit" value="confirm" class="primary">Start</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="detail-dialog">
+    <div id="detail-body"></div>
+    <form method="dialog"><button class="link">Close</button></form>
+  </dialog>
+
+  <script src="/app.js"></script>
+</body>
+</html>

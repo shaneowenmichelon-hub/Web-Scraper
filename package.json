@@ -1,0 +1,22 @@
+{
+  "name": "event-promoter-scraper",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Discover US independent event promoters with upcoming ticketed events using Exa, with a tracking dashboard.",
+  "scripts": {
+    "init-db": "node src/db.js",
+    "scrape": "node src/run-scrape.js",
+    "dashboard": "node src/server.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.5.0",
+    "dotenv": "^16.4.5",
+    "exa-js": "^1.4.10",
+    "express": "^4.21.1",
+    "p-limit": "^6.1.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
