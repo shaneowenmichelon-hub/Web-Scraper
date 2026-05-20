@@ -6,11 +6,20 @@ services:
     buildCommand: npm install && npm run build
     startCommand: npm start
     envVars:
+      # CRITICAL: pin Node so better-sqlite3 uses a prebuilt binary.
+      # Node 23+ has no prebuilt and will fail to compile from source.
+      - key: NODE_VERSION
+        value: "22"
       - key: EXA_API_KEY
         sync: false
       - key: NODE_ENV
         value: production
-    disk:
-      name: data
-      mountPath: /opt/render/project/src/data
-      sizeGB: 1
+    # NOTE: persistent disks require a paid plan. With `plan: free` Render
+    # may reject the disk block or silently drop persistence on redeploy.
+    # To enable persistence, change `plan:` to `starter` (or higher) and
+    # uncomment the block below. Until then, the SQLite DB resets on
+    # every deploy.
+    # disk:
+    #   name: data
+    #   mountPath: /opt/render/project/src/data
+    #   sizeGB: 1

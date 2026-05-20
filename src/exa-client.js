@@ -1,13 +1,17 @@
 import 'dotenv/config';
 import Exa from 'exa-js';
 
-const apiKey = process.env.EXA_API_KEY;
-if (!apiKey) {
-  console.error('Missing EXA_API_KEY. Copy .env.example to .env and fill it in.');
-  process.exit(1);
-}
+let _exa = null;
 
-export const exa = new Exa(apiKey);
+function getExa() {
+  if (_exa) return _exa;
+  const apiKey = process.env.EXA_API_KEY;
+  if (!apiKey) {
+    throw new Error('Missing EXA_API_KEY. Set it in your environment (Render dashboard, or a local .env file).');
+  }
+  _exa = new Exa(apiKey);
+  return _exa;
+}
 
 // Run a neural search and pull full page text in one call.
 // Returns: Array<{ url, title, text, publishedDate? }>
@@ -27,7 +31,7 @@ export async function searchWithContents(query, {
   if (excludeDomains?.length) params.excludeDomains = excludeDomains;
   if (startPublishedDate) params.startPublishedDate = startPublishedDate;
 
-  const resp = await exa.searchAndContents(query, params);
+  const resp = await getExa().searchAndContents(query, params);
   return (resp.results || []).map(r => ({
     url: r.url,
     title: r.title,

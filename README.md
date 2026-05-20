@@ -16,12 +16,26 @@ Excludes ticketing platforms as *entities* (Ticketmaster, AXS, Eventbrite, Live 
 
 ## Setup
 
+Requires **Node 20–22** (pinned via `.nvmrc`). `better-sqlite3` ships
+prebuilt binaries for those versions; Node 23+ tries to compile from
+source and will fail on most hosts.
+
 ```bash
+nvm use            # picks up .nvmrc → Node 22
 npm install
 cp .env.example .env
 # edit .env and paste your Exa API key (get one at https://dashboard.exa.ai/api-keys)
 npm run init-db
 ```
+
+## Deploy to Render
+
+A `render.yaml` blueprint is included. In Render: **New → Blueprint**,
+point at this repo, set `EXA_API_KEY` in the dashboard, deploy.
+
+⚠️ Render free tier has an ephemeral filesystem — the SQLite DB resets
+on every deploy. For persistence, change `plan: free` to `plan: starter`
+in `render.yaml` and uncomment the `disk:` block.
 
 ## Run a scrape
 
