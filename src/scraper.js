@@ -65,7 +65,7 @@ export async function runScrape({
   cities,
   verticals,
   numResults = Number(process.env.DEFAULT_RESULTS_PER_QUERY) || 8,
-  concurrency = Number(process.env.SCRAPE_CONCURRENCY) || 4,
+  concurrency = Number(process.env.SCRAPE_CONCURRENCY) || 2,
   maxQueries = null,
   onLog = (m) => console.log(m),
 } = {}) {
