@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Shane Michelon — Operator, Founder, Builder of College Culture</title>
+<meta name="description" content="Shane Michelon builds brands, events, and companies at the center of college culture — ZMM Events, the Night School tour, Collegiate Agency, and S.O.S Consultants." />
+<meta name="author" content="Shane Michelon" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Shane Michelon" />
+<meta property="og:description" content="Operator and founder building brands, events, and companies at the center of college culture." />
+<meta property="og:url" content="https://michelon.co" />
+
+<!-- Fonts (load in the visitor's browser; degrade gracefully if blocked) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..700&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+<style>
+/* ============================================================
+   Shane Michelon — michelon.co
+   Aesthetic: editorial minimalism (Nik Sharma) x bold operator
+   contrast (Dylan Ander). Palette echoes the Night School brand.
+   ============================================================ */
+
+:root{
+  --paper:#F4F1EA;        /* warm editorial base */
+  --paper-2:#ECE7DB;
+  --ink:#14140F;          /* near-black text */
+  --ink-soft:#4a4740;
+  --navy:#0B0C16;         /* midnight navy (dark sections) */
+  --navy-2:#12142a;
+  --sapphire:#405FFA;     /* electric sapphire accent */
+  --cyan:#09BBC8;         /* strong cyan */
+  --frost:#D9FCED;
+  --line:rgba(20,20,15,.14);
+  --line-d:rgba(255,255,255,.14);
+
+  --maxw:1180px;
+  --serif:"Fraunces","Times New Roman",Georgia,serif;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  --mono:"Space Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-weight:400;line-height:1.5;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+
+/* eyebrow / mono labels */
+.eyebrow{
+  font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ink-soft);
+}
+.eyebrow .dot{color:var(--sapphire)}
+
+/* ---------- NAV ---------- */
+header.nav{
+  position:fixed;top:0;left:0;right:0;z-index:60;
+  transition:background .4s ease,border-color .4s ease,backdrop-filter .4s;
+  border-bottom:1px solid transparent;
+}
+header.nav.scrolled{
+  background:rgba(244,241,234,.82);backdrop-filter:saturate(140%) blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brandmark{font-family:var(--serif);font-weight:600;font-size:22px;letter-spacing:.01em}
+.brandmark b{color:var(--sapphire)}
+.nav-links{display:flex;gap:30px;align-items:center}
+.nav-links a{font-size:13.5px;font-weight:500;color:var(--ink-soft);transition:color .2s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{
+  font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid var(--ink);border-radius:100px;padding:9px 18px;color:var(--ink);
+  transition:.25s;
+}
+.nav-cta:hover{background:var(--ink);color:var(--paper)}
+.nav-burger{display:none;font-size:22px;background:none;border:0;cursor:pointer;color:var(--ink)}
+@media(max-width:760px){
+  .nav-links{display:none}
+  .nav-burger{display:block}
+}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden}
+.hero-media{position:absolute;inset:0;z-index:0}
+.slide{
+  position:absolute;inset:0;background-size:cover;background-position:center;
+  opacity:0;transition:opacity 1.6s ease,transform 7s ease;transform:scale(1.08);
+}
+.slide.on{opacity:1;transform:scale(1)}
+/* branded gradient fallback slides */
+.slide.grad1{background:radial-gradient(120% 120% at 20% 10%,#1b2360 0%,#0B0C16 55%),linear-gradient(135deg,#405FFA22,#09BBC822)}
+.slide.grad2{background:radial-gradient(120% 120% at 80% 20%,#0d3b45 0%,#0B0C16 60%)}
+.slide.grad3{background:radial-gradient(120% 120% at 50% 90%,#2a2350 0%,#0B0C16 60%)}
+.hero-media::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(11,12,22,.86) 0%,rgba(11,12,22,.6) 42%,rgba(11,12,22,.28) 100%);
+}
+.hero-media.is-empty::after{
+  background:linear-gradient(90deg,rgba(11,12,22,.72),rgba(11,12,22,.4))
+}
+.hero-in{position:relative;z-index:2;color:#fff;padding-top:90px}
+.hero h1{
+  font-family:var(--serif);font-weight:400;color:#fff;
+  font-size:clamp(52px,10vw,124px);line-height:.94;letter-spacing:-.02em;margin:14px 0 0;
+}
+.hero h1 em{font-style:italic;color:var(--frost)}
+.hero .lede{
+  max-width:620px;margin:26px 0 0;font-size:clamp(17px,2.2vw,22px);
+  color:rgba(255,255,255,.86);font-weight:300;line-height:1.5;
+}
+.hero .eyebrow{color:rgba(255,255,255,.72)}
+.hero-cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
+.btn{
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;
+  padding:14px 24px;border-radius:100px;transition:.25s;cursor:pointer;border:1px solid transparent;
+}
+.btn-primary{background:var(--sapphire);color:#fff}
+.btn-primary:hover{background:#2f4bec;transform:translateY(-2px)}
+.btn-ghost{border-color:rgba(255,255,255,.4);color:#fff}
+.btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.scroll-cue{
+  position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:2;
+  font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.6);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+}
+.scroll-cue .bar{width:1px;height:38px;background:linear-gradient(rgba(255,255,255,.6),transparent);animation:cue 2.2s infinite}
+@keyframes cue{0%{opacity:.2;transform:scaleY(.4);transform-origin:top}50%{opacity:1}100%{opacity:.2;transform:scaleY(1)}}
+
+/* ---------- MARQUEE ---------- */
+.marquee{background:var(--ink);color:var(--paper);padding:20px 0;overflow:hidden;white-space:nowrap;border-top:1px solid #000}
+.marquee-track{display:inline-flex;gap:0;animation:scroll 34s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+.marquee span{font-family:var(--serif);font-size:26px;font-style:italic;padding:0 34px;opacity:.9}
+.marquee span::after{content:"✦";font-style:normal;color:var(--cyan);margin-left:34px;font-size:14px;vertical-align:middle}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* ---------- SECTION SHELL ---------- */
+section{position:relative}
+.sec-pad{padding:clamp(72px,11vw,140px) 0}
+.sec-head{max-width:760px;margin-bottom:56px}
+.sec-head h2{
+  font-family:var(--serif);font-weight:400;font-size:clamp(34px,5.4vw,60px);
+  line-height:1.02;letter-spacing:-.02em;margin:14px 0 0;
+}
+.sec-head p{font-size:18px;color:var(--ink-soft);margin:18px 0 0;max-width:600px;font-weight:300}
+
+/* ---------- VENTURES ---------- */
+.ventures{display:grid;gap:26px}
+.venture{
+  display:grid;grid-template-columns:1.15fr 1fr;gap:0;
+  border:1px solid var(--line);border-radius:20px;overflow:hidden;background:#fff;
+  transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s;
+}
+.venture:hover{transform:translateY(-4px);box-shadow:0 26px 60px -30px rgba(20,20,15,.4)}
+.venture .v-body{padding:clamp(28px,3.4vw,46px);display:flex;flex-direction:column}
+.v-role{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--sapphire)}
+.v-name{font-family:var(--serif);font-size:clamp(30px,4vw,44px);font-weight:500;line-height:1.02;margin:10px 0 0;letter-spacing:-.01em}
+.v-tag{font-size:15px;color:var(--ink-soft);margin:6px 0 0;font-style:italic;font-family:var(--serif)}
+.v-desc{margin:20px 0 0;font-size:16px;line-height:1.6;color:#26251f;font-weight:300}
+.v-stats{display:flex;gap:28px;margin-top:auto;padding-top:26px;flex-wrap:wrap}
+.v-stat b{font-family:var(--serif);font-size:26px;font-weight:600;display:block;line-height:1}
+.v-stat span{font-size:12px;color:var(--ink-soft);font-family:var(--mono);letter-spacing:.04em}
+.v-link{margin-top:22px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);display:inline-flex;gap:8px;align-items:center}
+.v-link .arw{transition:transform .25s}
+.v-link:hover .arw{transform:translateX(5px)}
+.v-media{position:relative;min-height:320px;background:var(--navy);overflow:hidden}
+.v-media .slide{transition:opacity 1.4s ease,transform 8s ease}
+.venture:nth-child(even){grid-template-columns:1fr 1.15fr}
+.venture:nth-child(even) .v-media{order:-1}
+@media(max-width:820px){
+  .venture,.venture:nth-child(even){grid-template-columns:1fr}
+  .venture:nth-child(even) .v-media{order:0}
+  .v-media{min-height:240px}
+}
+
+/* ---------- STATS BAND ---------- */
+.band{background:var(--navy);color:#fff;position:relative;overflow:hidden}
+.band::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(60% 80% at 15% 0%,rgba(64,95,250,.28),transparent 60%),
+  radial-gradient(50% 70% at 90% 100%,rgba(9,187,200,.22),transparent 60%)}
+.band .wrap{position:relative;z-index:2}
+.band-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:left}
+.band-grid .b-stat b{font-family:var(--serif);font-size:clamp(40px,6vw,72px);font-weight:500;display:block;line-height:.95;letter-spacing:-.02em}
+.band-grid .b-stat b em{font-style:normal;color:var(--cyan)}
+.band-grid .b-stat span{font-size:13px;color:rgba(255,255,255,.66);font-family:var(--mono);letter-spacing:.02em;display:block;margin-top:12px}
+@media(max-width:760px){.band-grid{grid-template-columns:1fr 1fr;gap:34px 20px}}
+
+/* ---------- ABOUT ---------- */
+.about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(30px,5vw,70px);align-items:center}
+.about-portrait{position:relative;aspect-ratio:4/5;border-radius:18px;overflow:hidden;background:var(--paper-2);border:1px solid var(--line)}
+.about-portrait .slide{transition:opacity 1.4s}
+.about-portrait .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--ink-soft);font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-align:center;padding:24px}
+.about-copy h2{font-family:var(--serif);font-weight:400;font-size:clamp(30px,4.6vw,50px);line-height:1.04;letter-spacing:-.02em;margin:12px 0 0}
+.about-copy p{font-size:17px;line-height:1.65;color:#2b2a24;margin:20px 0 0;font-weight:300}
+.about-copy p b{font-weight:600;color:var(--ink)}
+.pill-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.pill{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);border-radius:100px;padding:8px 15px;color:var(--ink-soft)}
+@media(max-width:820px){.about-grid{grid-template-columns:1fr}.about-portrait{max-width:420px}}
+
+/* ---------- NOW ---------- */
+.now-list{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:10px}
+.now-card{border:1px solid var(--line);border-radius:16px;padding:30px 26px;background:#fff;transition:.4s}
+.now-card:hover{border-color:var(--sapphire);transform:translateY(-3px)}
+.now-card .n{font-family:var(--mono);font-size:12px;color:var(--sapphire);letter-spacing:.1em}
+.now-card h3{font-family:var(--serif);font-weight:500;font-size:22px;margin:14px 0 0}
+.now-card p{font-size:15px;color:var(--ink-soft);margin:10px 0 0;line-height:1.55;font-weight:300}
+@media(max-width:820px){.now-list{grid-template-columns:1fr}}
+
+/* ---------- CONTACT / FOOTER ---------- */
+.contact{background:var(--navy);color:#fff;position:relative;overflow:hidden}
+.contact::before{content:"";position:absolute;inset:0;background:radial-gradient(70% 90% at 80% 10%,rgba(64,95,250,.3),transparent 55%)}
+.contact .wrap{position:relative;z-index:2}
+.contact h2{font-family:var(--serif);font-weight:400;font-size:clamp(40px,8vw,104px);line-height:.98;letter-spacing:-.02em;margin:16px 0 0}
+.contact h2 a{border-bottom:2px solid var(--sapphire);transition:.25s}
+.contact h2 a:hover{color:var(--cyan);border-color:var(--cyan)}
+.contact-links{display:flex;gap:26px;flex-wrap:wrap;margin-top:44px}
+.contact-links a{font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.8);border:1px solid var(--line-d);border-radius:100px;padding:12px 22px;transition:.25s}
+.contact-links a:hover{border-color:#fff;color:#fff;background:rgba(255,255,255,.06)}
+.foot{border-top:1px solid var(--line-d);margin-top:70px;padding:26px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.foot small{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:rgba(255,255,255,.55)}
+
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .slide{opacity:1}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brandmark" href="#top">Shane<b>.</b>Michelon</a>
+    <nav class="nav-links">
+      <a href="#ventures">Ventures</a>
+      <a href="#impact">Impact</a>
+      <a href="#about">About</a>
+      <a href="#now">Now</a>
+      <a class="nav-cta" href="#contact">Get in touch</a>
+    </nav>
+    <button class="nav-burger" id="burger" aria-label="Menu">☰</button>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="hero-media" id="heroMedia" aria-hidden="true">
+    <div class="slide grad1 on"></div>
+    <div class="slide grad2"></div>
+    <div class="slide grad3"></div>
+  </div>
+  <div class="wrap hero-in">
+    <p class="eyebrow">Operator <span class="dot">✦</span> Founder <span class="dot">✦</span> New Orleans / Chicago</p>
+    <h1>Shane<br><em>Michelon</em></h1>
+    <p class="lede">I build brands, events, and companies at the center of college culture — from sold-out festivals and the national <strong>Night School</strong> tour to the agency and housing platforms powering campus life.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#ventures">See what I'm building</a>
+      <a class="btn btn-ghost" href="#contact">Work with me</a>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><span class="bar"></span></div>
+</section>
+
+<!-- ================= MARQUEE ================= -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track" id="marquee">
+    <span>ZMM Events</span><span>Night School Tour</span><span>Collegiate Agency</span><span>S.O.S Consultants</span><span>Game Day NOLA</span><span>Home Turf SF</span>
+    <span>ZMM Events</span><span>Night School Tour</span><span>Collegiate Agency</span><span>S.O.S Consultants</span><span>Game Day NOLA</span><span>Home Turf SF</span>
+  </div>
+</div>
+
+<!-- ================= VENTURES ================= -->
+<section class="sec-pad" id="ventures">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">01 <span class="dot">/</span> The portfolio</p>
+      <h2>Four companies, one thesis: own the college moment.</h2>
+      <p>Everything I build lives where students, culture, and brands collide — the experiences they show up for and the platforms that make campus life work.</p>
+    </div>
+
+    <div class="ventures">
+
+      <!-- ZMM -->
+      <article class="venture reveal">
+        <div class="v-body">
+          <span class="v-role">President</span>
+          <h3 class="v-name">ZMM Events</h3>
+          <p class="v-tag">Experiential events & college marketing.</p>
+          <p class="v-desc">The experiential company behind the culture-defining weekends of the college calendar — building large-scale festivals and activations that turn a night out into a national moment. Home to <strong>Game Day NOLA</strong> and <strong>Home Turf SF</strong>, drawing thousands of students, creators, and headline talent.</p>
+          <div class="v-stats">
+            <div class="v-stat"><b>3,300+</b><span>Game Day NOLA attendees</span></div>
+            <div class="v-stat"><b>85M+</b><span>combined creator reach</span></div>
+          </div>
+          <a class="v-link" href="https://zmm.events" target="_blank" rel="noopener">Visit zmm.events <span class="arw">→</span></a>
+        </div>
+        <div class="v-media" data-gallery="zmm">
+          <div class="slide grad1 on"></div><div class="slide grad2"></div>
+        </div>
+      </article>
+
+      <!-- Night School -->
+      <article class="venture reveal">
+        <div class="v-body">
+          <span class="v-role">Co-Creator</span>
+          <h3 class="v-name">Night School</h3>
+          <p class="v-tag">The national college tour.</p>
+          <p class="v-desc">A touring live-music franchise that lands top DJs and artists on campuses across the country — pairing marquee headliners with a repeatable, city-by-city event engine. The flagship property that puts ZMM in front of students everywhere they are.</p>
+          <div class="v-stats">
+            <div class="v-stat"><b>20+</b><span>campus markets</span></div>
+            <div class="v-stat"><b>National</b><span>touring footprint</span></div>
+          </div>
+          <a class="v-link" href="https://zmm.events" target="_blank" rel="noopener">Explore the tour <span class="arw">→</span></a>
+        </div>
+        <div class="v-media" data-gallery="night">
+          <div class="slide grad3 on"></div><div class="slide grad1"></div>
+        </div>
+      </article>
+
+      <!-- Collegiate Agency -->
+      <article class="venture reveal">
+        <div class="v-body">
+          <span class="v-role">Founder</span>
+          <h3 class="v-name">Collegiate Agency</h3>
+          <p class="v-tag">Where brands meet campus culture.</p>
+          <p class="v-desc">A Gen-Z marketing agency that puts brands in front of college students through events, an ambassador network, and campus influencers — running full-funnel campaigns from strategy to on-the-ground execution for consumer brands going after the student market.</p>
+          <div class="v-stats">
+            <div class="v-stat"><b>Nationwide</b><span>ambassador network</span></div>
+            <div class="v-stat"><b>Full-funnel</b><span>campus campaigns</span></div>
+          </div>
+          <a class="v-link" href="https://collegiateagency.com" target="_blank" rel="noopener">Visit collegiateagency.com <span class="arw">→</span></a>
+        </div>
+        <div class="v-media" data-gallery="collegiate">
+          <div class="slide grad2 on"></div><div class="slide grad3"></div>
+        </div>
+      </article>
+
+      <!-- SOS -->
+      <article class="venture reveal">
+        <div class="v-body">
+          <span class="v-role">Founder & CEO</span>
+          <h3 class="v-name">S.O.S Consultants</h3>
+          <p class="v-tag">Off-campus housing, solved.</p>
+          <p class="v-desc">A New Orleans student-housing company that bridges students and landlords — a curated, consultative service that helps Tulane and Loyola students find the right off-campus home, powered by a student-led ambassador program that removes the friction from the search.</p>
+          <div class="v-stats">
+            <div class="v-stat"><b>NOLA</b><span>Uptown &amp; beyond</span></div>
+            <div class="v-stat"><b>Tulane · Loyola</b><span>students served</span></div>
+          </div>
+          <a class="v-link" href="https://www.sosconsultantsnola.com" target="_blank" rel="noopener">Visit sosconsultantsnola.com <span class="arw">→</span></a>
+        </div>
+        <div class="v-media" data-gallery="sos">
+          <div class="slide grad3 on"></div><div class="slide grad2"></div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= IMPACT BAND ================= -->
+<section class="band sec-pad" id="impact">
+  <div class="wrap">
+    <div class="sec-head reveal" style="margin-bottom:46px">
+      <p class="eyebrow" style="color:rgba(255,255,255,.7)">02 <span class="dot">/</span> By the numbers</p>
+      <h2 style="color:#fff">The reach behind the work.</h2>
+    </div>
+    <div class="band-grid">
+      <div class="b-stat reveal"><b>4</b><span>companies founded & led</span></div>
+      <div class="b-stat reveal"><b>3,300<em>+</em></b><span>attendees at a single event</span></div>
+      <div class="b-stat reveal"><b>85M<em>+</em></b><span>combined creator audience</span></div>
+      <div class="b-stat reveal"><b>20<em>+</em></b><span>college markets reached</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="sec-pad" id="about">
+  <div class="wrap about-grid">
+    <div class="about-portrait reveal" id="portrait">
+      <div class="ph">Drop a headshot at<br>assets/img/portrait.jpg</div>
+    </div>
+    <div class="about-copy reveal">
+      <p class="eyebrow">03 <span class="dot">/</span> About</p>
+      <h2>An operator who turns culture into companies.</h2>
+      <p>I'm <b>Shane Michelon</b> — a founder and operator working at the intersection of events, marketing, and real estate for the college market. I started building where I studied, at <b>Tulane University</b>, and turned it into a group of companies that reach students across the country.</p>
+      <p>As President of <b>ZMM Events</b> I help produce some of the biggest weekends on the college calendar. I founded <b>Collegiate Agency</b> to give brands a direct line into campus culture, and <b>S.O.S Consultants</b> to fix how students find a place to live. The throughline: find where students already are, and build something worth showing up for.</p>
+      <div class="pill-row">
+        <span class="pill">Tulane University</span>
+        <span class="pill">Marketing &amp; Business Law</span>
+        <span class="pill">Events</span>
+        <span class="pill">Brand Marketing</span>
+        <span class="pill">Real Estate</span>
+        <span class="pill">New Orleans · Chicago</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= NOW ================= -->
+<section class="sec-pad" id="now" style="background:var(--paper-2)">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">04 <span class="dot">/</span> Currently</p>
+      <h2>What I'm building right now.</h2>
+    </div>
+    <div class="now-list">
+      <div class="now-card reveal"><span class="n">Scaling</span><h3>The Night School tour</h3><p>Expanding the national college tour into new markets with bigger headliners and repeatable event operations.</p></div>
+      <div class="now-card reveal"><span class="n">Growing</span><h3>Collegiate Agency</h3><p>Onboarding consumer brands and scaling the ambassador &amp; influencer network across more campuses.</p></div>
+      <div class="now-card reveal"><span class="n">Building</span><h3>S.O.S Consultants</h3><p>Deepening the New Orleans housing platform and the student-led ambassador model behind it.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="contact sec-pad" id="contact">
+  <div class="wrap">
+    <p class="eyebrow" style="color:rgba(255,255,255,.7)">05 <span class="dot">/</span> Let's talk</p>
+    <h2>Let's build<br>something <a href="mailto:shane@zmmevents.com">together.</a></h2>
+    <div class="contact-links">
+      <a href="mailto:shane@zmmevents.com">shane@zmmevents.com</a>
+      <a href="https://www.linkedin.com/in/shane-michelon-189549227/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://zmm.events" target="_blank" rel="noopener">ZMM Events</a>
+      <a href="https://collegiateagency.com" target="_blank" rel="noopener">Collegiate Agency</a>
+    </div>
+    <div class="foot">
+      <small>© <span id="yr"></span> Shane Michelon</small>
+      <small>michelon.co</small>
+    </div>
+  </div>
+</section>
+
+<script>
+/* ---- year ---- */
+document.getElementById('yr').textContent=new Date().getFullYear();
+
+/* ---- nav scroll state ---- */
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+
+/* ---- mobile menu (simple anchor jump) ---- */
+document.getElementById('burger').addEventListener('click',()=>{
+  document.getElementById('contact').scrollIntoView({behavior:'smooth'});
+});
+
+/* ---- reveal on scroll ---- */
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.14});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ============================================================
+   ROTATING PHOTO ENGINE
+   Point these arrays at real files in assets/img/ (any filenames).
+   The engine preloads each image; only images that actually load
+   get shown. If none load, the branded gradient slides remain —
+   so the page always looks intentional.
+   ============================================================ */
+const IMAGES={
+  // shared hero rotation — best all-around shots
+  hero:   ['t1.jpg','t9.jpg','t14.jpg','t20.jpg','t28.jpg','t34.jpg','t47.jpg'],
+  zmm:        ['t2.jpg','t11.jpg','t25.jpg','t29.jpg'],
+  night:      ['t4.jpg','t16.jpg','t22.jpg','t38.jpg'],
+  collegiate: ['t6.jpg','t18.jpg','t30.jpg','t41.jpg'],
+  sos:        ['t8.jpg','t13.jpg','t24.jpg'],
+  portrait:   ['portrait.jpg']
+};
+const BASE='assets/img/';
+
+function buildRotator(container,files,{interval=5200,cover=true}={}){
+  const loaded=[];
+  let idx=0,timer=null;
+  files.forEach(f=>{
+    const img=new Image();
+    img.onload=()=>{
+      const s=document.createElement('div');
+      s.className='slide';
+      s.style.backgroundImage=`url("${BASE+f}")`;
+      // insert real slides before gradient fallbacks so they take over
+      container.appendChild(s);
+      loaded.push(s);
+      if(loaded.length===1){
+        // hide gradient fallbacks once we have a real image
+        container.querySelectorAll('.slide').forEach(g=>{if(!loaded.includes(g)){g.style.opacity='0'}});
+        s.classList.add('on');
+        if(container.classList.contains('hero-media')) container.classList.remove('is-empty');
+        start();
+      }
+    };
+    img.src=BASE+f;
+  });
+  function start(){
+    if(timer||loaded.length<2)return;
+    timer=setInterval(()=>{
+      loaded[idx].classList.remove('on');
+      idx=(idx+1)%loaded.length;
+      loaded[idx].classList.add('on');
+    },interval);
+  }
+}
+
+// hero
+buildRotator(document.getElementById('heroMedia'),IMAGES.hero,{interval:5200});
+// venture cards
+document.querySelectorAll('[data-gallery]').forEach(el=>{
+  const key=el.getAttribute('data-gallery');
+  if(IMAGES[key]) buildRotator(el,IMAGES[key],{interval:4200});
+});
+// portrait
+const portrait=document.getElementById('portrait');
+(function(){
+  const img=new Image();
+  img.onload=()=>{
+    const s=document.createElement('div');s.className='slide on';
+    s.style.cssText='background-size:cover;background-position:center;background-image:url("'+BASE+'portrait.jpg")';
+    portrait.appendChild(s);
+    const ph=portrait.querySelector('.ph');if(ph)ph.style.display='none';
+  };
+  img.src=BASE+'portrait.jpg';
+})();
+</script>
+</body>
+</html>
